@@ -1,0 +1,125 @@
+### Interfaces
+
+interface Card {
+  id: ID!
+  name: String!
+  cost: Int!
+  inkwell: Boolean!
+  ink: Ink!
+  classifications: [Classification!]!
+  rarity: Rarity!
+  set: Int!
+  number: Int!
+}
+
+### Types
+
+type Character implements Card {
+  id: ID!
+  name: String!
+  cost: Int!
+  inkwell: Boolean!
+  ink: Ink!
+  classifications: [Classification!]!
+  rarity: Rarity!
+  set: Int!
+  number: Int!
+
+  version: String!
+  strength: Int!
+  willpower: Int!
+  loreValue: Int # Some characters don't have lore value, such as those with Reckless
+  abilities: [Ability!]
+}
+
+type Action implements Card {
+  id: ID!
+  name: String!
+  cost: Int!
+  inkwell: Boolean!
+  ink: Ink!
+  classifications: [Classification!]!
+  rarity: Rarity!
+  set: Int!
+  number: Int!
+
+  description: String!
+  singTogetherCost: Int
+}
+
+type Ability {
+  id: ID!
+  name: String!
+  description: String!
+  common: Boolean! # True for common abilities such as Bodyguard, Reckless, Evasive, etc.
+}
+
+### Enums
+
+enum Ink {
+  AMBER
+  AMETHYST
+  EMERALD
+  RUBY
+  SAPPHIRE
+  STEEL
+}
+
+enum Rarity {
+  COMMON
+  UNCOMMON
+  RARE
+  SUPER_RARE
+  LEGENDARY
+  EPIC
+  ENCHANTED
+  ICONIC
+}
+
+enum Classification {
+  ITEM
+  ACTION
+  SONG
+  LOCATION
+
+  STORYBORN
+  DREAMBORN
+  FLOODBORN
+
+  HERO
+  VILLAIN
+  ALLY
+
+  ALIEN
+  CAPTAIN
+  HUNNY
+  KING
+  KNIGHT
+  MADRIGAL
+  MENTOR
+  MONSTER
+  PRINCE
+  PRINCESS
+  QUEEN
+  RED_PANDA
+  SORCERER
+  TEAM
+  TOY
+  VINELING
+
+  OTHER # Placeholder until official names are added.
+}
+
+### Queries
+
+type Query {
+  cards: [Card!]!
+  characters: [Character!]!
+  actions: [Action!]!
+}
+
+### Query Inputs
+
+### Mutations
+
+### Mutation Inputs
