@@ -25,10 +25,10 @@ type Character implements Card {
   set: Int!
   number: Int!
 
-  version: String!
+  version: String! # Version / Variant / Title
   strength: Int!
   willpower: Int!
-  loreValue: Int # Some characters don't have lore value, such as those with Reckless
+  loreValue: Int!
   abilities: [Ability!]
 }
 
@@ -47,11 +47,28 @@ type Action implements Card {
   singTogetherCost: Int
 }
 
+type Location implements Card {
+  id: ID!
+  name: String!
+  cost: Int!
+  inkwell: Boolean!
+  ink: Ink!
+  classifications: [Classification!]!
+  rarity: Rarity!
+  set: Int!
+  number: Int!
+
+  willpower: Int!
+  loreValue: Int!
+  moveCost: Int!
+  abilities: [Ability!]
+}
+
 type Ability {
   id: ID!
   name: String!
   description: String!
-  common: Boolean! # True for common abilities such as Bodyguard, Reckless, Evasive, etc.
+  keyword: Boolean! # True for common abilities such as Bodyguard, Reckless, Evasive, etc.
 }
 
 ### Enums
@@ -93,6 +110,7 @@ enum Classification {
   ALIEN
   CAPTAIN
   HUNNY
+  HYPERIA_CITY
   KING
   KNIGHT
   MADRIGAL
@@ -113,12 +131,78 @@ enum Classification {
 ### Queries
 
 type Query {
-  cards: [Card!]!
-  characters: [Character!]!
-  actions: [Action!]!
+  cards(filter: CardsFilter): [Card!]!
+  characters(filter: CharactersFilter): [Character!]!
+  actions(filter: ActionsFilter): [Action!]!
+  locations(filter: LocationsFilter): [Location!]!
 }
 
 ### Query Inputs
+
+type CardsFilter {
+  ids: [ID!]
+  names: [String!]
+  costs: [Int!]
+  inkwell: Boolean
+  inks: [Ink!]
+  classifications: [Classification!]
+  rarities: [Rarity!]
+  sets: [Int!]
+}
+
+type CharactersFilter {
+  ids: [ID!]
+  names: [String!]
+  costs: [Int!]
+  inkwell: Boolean
+  inks: [Ink!]
+  classifications: [Classification!]
+  rarities: [Rarity!]
+  sets: [Int!]
+
+  versions: [String!]
+  strengths: [Int!]
+  willpower: [Int!]
+  loreValues: [Int!]
+  abilities: AbilitiesFilter
+}
+
+type ActionsFilter {
+  ids: [ID!]
+  names: [String!]
+  costs: [Int!]
+  inkwell: Boolean
+  inks: [Ink!]
+  classifications: [Classification!]
+  rarities: [Rarity!]
+  sets: [Int!]
+
+  descriptions: [String!]
+  singTogetherCosts: [Int!]
+}
+
+type LocationsFilter {
+  ids: [ID!]
+  names: [String!]
+  costs: [Int!]
+  inkwell: Boolean
+  inks: [Ink!]
+  classifications: [Classification!]
+  rarities: [Rarity!]
+  sets: [Int!]
+
+  willpower: [Int!]
+  loreValues: [Int!]
+  moveCosts: [Int!]
+  abilities: AbilitiesFilter
+}
+
+type AbilitiesFilter {
+  ids: [ID!]
+  names: [String!]
+  descriptions: [String!]
+  keyword: Boolean
+}
 
 ### Mutations
 
