@@ -139,7 +139,7 @@ type Query {
 
 ### Query Inputs
 
-type CardsFilter {
+input CardsFilter {
   ids: [ID!]
   names: [String!]
   costs: [Int!]
@@ -150,7 +150,7 @@ type CardsFilter {
   sets: [Int!]
 }
 
-type CharactersFilter {
+input CharactersFilter {
   ids: [ID!]
   names: [String!]
   costs: [Int!]
@@ -167,7 +167,7 @@ type CharactersFilter {
   abilities: AbilitiesFilter
 }
 
-type ActionsFilter {
+input ActionsFilter {
   ids: [ID!]
   names: [String!]
   costs: [Int!]
@@ -181,7 +181,7 @@ type ActionsFilter {
   singTogetherCosts: [Int!]
 }
 
-type LocationsFilter {
+input LocationsFilter {
   ids: [ID!]
   names: [String!]
   costs: [Int!]
@@ -197,7 +197,7 @@ type LocationsFilter {
   abilities: AbilitiesFilter
 }
 
-type AbilitiesFilter {
+input AbilitiesFilter {
   ids: [ID!]
   names: [String!]
   descriptions: [String!]
